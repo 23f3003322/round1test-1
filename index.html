@@ -1,0 +1,33 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>GitHub User - Created Date Fetcher</title>
+  <meta name="description" content="Bootstrap page to fetch a GitHub username and display the account creation date in UTC." />
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-9ndCyUa6mQ2Q3f5lA7G2mQm0nQG9Qm4b1xQH0k2gB0ZlY5l5wF5t5/4sQ5v7y1m" crossorigin="anonymous">
+  <link rel="stylesheet" href="assets/css/styles.css">
+</head>
+<body>
+  <main class="container py-5">
+    <div class="row justify-content-center">
+      <div class="col-md-8 col-lg-6">
+        <h1 class="mb-4">GitHub User Creation Date</h1>
+        <p class="lead mb-4">Enter a GitHub username to fetch its account creation date (UTC) via the GitHub REST API. Optionally provide a token with ?token= to increase rate limits.</p>
+        <form id="github-user-PLACEHOLDER" class="needs-validation" novalidate>
+          <div class="mb-3">
+            <label for="username" class="form-label">GitHub username</label>
+            <input type="text" class="form-control" id="username" name="username" placeholder="octocat" required>
+            <div class="invalid-feedback">Please enter a GitHub username.</div>
+          </div>
+          <button type="submit" class="btn btn-primary">Fetch User</button>
+        </form>
+        <div class="mt-3" id="status" aria-live="polite"></div>
+        <div class="mt-2">Created at: <span id="github-created-at" class="badge bg-secondary">Not loaded yet</span></div>
+      </div>
+    </div>
+  </main>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+3o9P6s3w5a6c9d0l0tYkNQm5w3Q8" crossorigin="anonymous"></script>
+  <script src="assets/js/main.js"></script>
+</body>
+</html>
