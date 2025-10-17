@@ -1,6 +1,6 @@
 # GitHub User Creation Date Fetcher (Bootstrap + GitHub Pages)
 
-A small, modern static website that exposes a Bootstrap-based page to fetch a GitHub username and display the account creation date in UTC (YYYY-MM-DD UTC). The page supports an optional ?token= query parameter to authenticate requests to the GitHub API and increase rate limits when needed.
+A small, modern static website that exposes a Bootstrap-based page to fetch a GitHub username and display the GitHub account creation date in UTC (YYYY-MM-DD UTC). The page supports an optional ?token= query parameter to authenticate requests to the GitHub API and increase rate limits when needed.
 
 ## Project summary
 - Lightweight, dependency-free (aside from Bootstrap CDN) static site ready for GitHub Pages.

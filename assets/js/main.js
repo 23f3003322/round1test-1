@@ -1,5 +1,4 @@
 (function() {
-  // Start by locating the placeholder form and replacing its id with a seed-based id
   const placeholderId = 'github-user-PLACEHOLDER';
   const placeholderForm = document.getElementById(placeholderId);
   if (!placeholderForm) {
@@ -10,9 +9,9 @@
   const dynamicId = 'github-user-' + seed;
   placeholderForm.id = dynamicId;
 
-  // Elements inside the page that we will update
-  const statusEl = document.getElementById('status');
+  const statusEl = document.getElementById('github-status');
   const createdAtEl = document.getElementById('github-created-at');
+  const ageEl = document.getElementById('github-account-age');
   const usernameInput = document.getElementById('username');
 
   // Helper to read ?token= from URL
@@ -24,6 +23,22 @@
       // Fallback parsing if URL constructor is unavailable
       const match = window.location.search.match(new RegExp('[?&]' + param + '=([^&]+)'));
       return match ? decodeURIComponent(match[1]) : null;
+    }
+  }
+
+  function computeAge(createdStr) {
+    try {
+      const createdDate = new Date(createdStr);
+      if (isNaN(createdDate)) return 0;
+      const now = new Date();
+      let years = now.getUTCFullYear() - createdDate.getUTCFullYear();
+      const m = now.getUTCMonth() - createdDate.getUTCMonth();
+      if (m < 0 || (m === 0 && now.getUTCDate() < createdDate.getUTCDate())) {
+        years--;
+      }
+      return Math.max(years, 0);
+    } catch (e) {
+      return 0;
     }
   }
 
@@ -49,16 +64,20 @@
       if (!resp.ok) {
         const msg = data && data.message ? data.message : 'Unknown error';
         statusEl.textContent = 'Error: ' + msg;
-        createdAtEl.textContent = 'N/A';
+        createdAtEl.textContent = 'Not loaded yet';
+        ageEl.textContent = '0 years';
         return;
       }
       if (data && data.created_at) {
         const dt = new Date(data.created_at);
         const ymd = dt.toISOString().slice(0, 10);
         createdAtEl.textContent = ymd + ' UTC';
+        const years = computeAge(data.created_at);
+        ageEl.textContent = years + ' years';
         statusEl.textContent = 'Data loaded for ' + username;
       } else {
         createdAtEl.textContent = 'Unknown';
+        ageEl.textContent = '0 years';
         statusEl.textContent = 'Creation date not available for this user.';
       }
     } catch (err) {
